@@ -1,0 +1,18 @@
+src
+|___ app
+     |
+     |__ user
+     |    |__ user.component.ts|.html
+     |    |
+     |    |__ login (folder)
+     |    |
+     |    |__ registration (folder)
+     |
+     |__ shared
+         |
+         |__pipes
+         |    |__ first-key.pipe.ts
+         |
+         |__ services
+            |
+            |__auth.service.ts
