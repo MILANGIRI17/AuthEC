@@ -3,16 +3,65 @@
 </div>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="mb-3">
-        <input formControlName="fullName" class="form-control bg-body-secondary" placeholder="Full Name"/>
+        <input type="text" formControlName="fullName" class="form-control bg-body-secondary" placeholder="Full Name"/>
+        @if(hasDisplayableError('fullName') && form.controls.fullName.hasError('required'))
+        {
+            <div class="error-feedback" >
+                Please enter your full name.
+            </div>
+        }
     </div>
-     <div class="mb-3">
+    <div class="mb-3">
         <input formControlName="email" type="text" class="form-control bg-body-secondary" placeholder="Email"/>
+        @if(hasDisplayableError('email'))
+        {
+            <div class="error-feedback">
+                @switch (form.controls.email.errors | firstKey)
+                {
+                    @case ('required')
+                    {
+                        Please enter your email address.
+                    }
+                    @case ('email')
+                    {
+                        Please enter a valid email address.
+                    }
+                }
+            </div>
+        }
     </div>
-     <div class="mb-3">
-        <input formControlName="password" type="password" class="form-control bg-body-secondary" placeholder="password"/>
+    <div class="mb-3">
+        <input formControlName="password" type="password" class="form-control bg-body-secondary" placeholder="Password"/>
+        @if(hasDisplayableError('password'))
+        {
+            <div class="error-feedback">
+                @switch (form.controls.password.errors | firstKey)
+                {
+                    @case ('required')
+                    {
+                        Please enter your password.
+                    }
+                    @case ('minlength')
+                    {
+                        Atleast 6 characters required.
+                    }
+                    @case ('pattern')
+                    {
+                        One or more special character(s).
+                    }
+                }
+            </div>
+        }
     </div>
      <div class="mb-3">
         <input formControlName="confirmPassword" type="password" class="form-control bg-body-secondary" placeholder="Confirm Password"/>
+        @if(form.controls.confirmPassword.hasError('passwordMismatch'))
+        {
+            <div class="error-feedback">
+                Password don't match.
+            </div>
+        }
+       
     </div>
     <div class="mt-4">
         <button type="submit" class="btn btn-success w-100 rounded-3">Register</button>
