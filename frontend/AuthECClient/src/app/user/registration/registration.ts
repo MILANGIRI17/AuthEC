@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { FirstKeyPipe } from '../../shared/pipes/first-key-pipe';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -12,6 +13,8 @@ import { FirstKeyPipe } from '../../shared/pipes/first-key-pipe';
 export class Registration {
   isSubmitted:boolean = false;
   formBuilder = inject(FormBuilder);
+
+  private authService : AuthService = inject(AuthService);
 
   passwordMatchValidator: ValidatorFn = (control: AbstractControl) : null => 
   {
@@ -51,10 +54,23 @@ export class Registration {
   }, {validators: this.passwordMatchValidator})
 
   
-  onSubmit()
-  {
+  onSubmit(){
     this.isSubmitted = true;
-    console.log(this.form.value);
+    if(this.form.valid){
+      this.authService.createUser(this.form.value)
+      .subscribe({
+        next: (response : any) => {
+          if(response.succeded)
+          {
+            this.form.reset();
+            this.isSubmitted = false;
+          }
+          console.log(response);
+        },
+        error: error => console.log('error', error)
+      });
+      console.log(this.form.value);
+    }
   }
 
   hasDisplayableError(controlName: string):Boolean{
