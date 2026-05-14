@@ -38,6 +38,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+#region  Config. CORS
+app.UseCors(options =>
+{
+    options.WithOrigins("http://localhost:4200")
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+});
+#endregion
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
