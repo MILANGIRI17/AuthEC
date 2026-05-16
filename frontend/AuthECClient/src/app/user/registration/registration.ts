@@ -4,6 +4,8 @@ import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidatorFn, Validat
 import { FirstKeyPipe } from '../../shared/pipes/first-key-pipe';
 import { AuthService } from '../../shared/services/auth.service';
 
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-registration',
   imports: [ReactiveFormsModule, CommonModule, FirstKeyPipe],
@@ -12,15 +14,15 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class Registration {
   isSubmitted:boolean = false;
-  formBuilder = inject(FormBuilder);
-
+  private toastr = inject(ToastrService);
   private authService : AuthService = inject(AuthService);
-
+  
+  //Implementing custom validation
   passwordMatchValidator: ValidatorFn = (control: AbstractControl) : null => 
   {
     const password = control.get('password');
     const confirmPassword = control.get('confirmPassword');
-
+    
     if(password && confirmPassword && password.value != confirmPassword.value)
       confirmPassword?.setErrors({passwordMismatch:true})
     else
@@ -28,7 +30,9 @@ export class Registration {
     
     return null;
   }
-
+    
+  //Injecting form builder
+  formBuilder = inject(FormBuilder);
   form = this.formBuilder.group({
     fullName :
     ['',
@@ -60,14 +64,19 @@ export class Registration {
       this.authService.createUser(this.form.value)
       .subscribe({
         next: (response : any) => {
-          if(response.succeded)
+          if(response.succeeded)
           {
             this.form.reset();
             this.isSubmitted = false;
+            this.toastr.success('User registered successfully!')
           }
           console.log(response);
         },
-        error: error => console.log('error', error)
+        error: (error: any) =>
+        {
+          console.log('error', error);
+          this.toastr.error('Registration failed. Try again.')
+        }
       });
       console.log(this.form.value);
     }
