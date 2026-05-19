@@ -3,6 +3,15 @@
 </div>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="mb-3">
+        <input type="text" formControlName="userName" class="form-control bg-body-secondary" placeholder="Username"/>
+        @if(hasDisplayableError('userName') && form.controls.userName.hasError('required'))
+        {
+            <div class="error-feedback" >
+                Please enter your user name.
+            </div>
+        }
+    </div>
+    <div class="mb-3">
         <input type="text" formControlName="fullName" class="form-control bg-body-secondary" placeholder="Full Name"/>
         @if(hasDisplayableError('fullName') && form.controls.fullName.hasError('required'))
         {

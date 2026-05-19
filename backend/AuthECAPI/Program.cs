@@ -56,7 +56,7 @@ app.MapPost("/api/signup", async (UserManager<AppUser> userManager, [FromBody]Us
 {
     AppUser user = new AppUser()
     {
-        UserName = userRegistrationModel.Email,
+        UserName = userRegistrationModel.UserName,
         Email = userRegistrationModel.Email,
         FullName = userRegistrationModel.FullName,
     };
@@ -73,4 +73,5 @@ public class UserRegistrationModel
     public string Email { get; set; }
     public string Password { get; set; }
     public string FullName { get; set; }
+    public string UserName { get; set; }
 }
