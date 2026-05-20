@@ -6,7 +6,9 @@ src
      |    |
      |    |__ login (folder)
      |    |
-     |    |__ registration (folder)
+     |    |__ registration (comp. folder)
+     |
+     |____ dashboard(cmp. folder)
      |
      |__ shared
          |

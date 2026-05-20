@@ -4,10 +4,11 @@ import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidatorFn, Validat
 import { FirstKeyPipe } from '../../shared/pipes/first-key-pipe';
 import { AuthService } from '../../shared/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-registration',
-  imports: [ReactiveFormsModule, CommonModule, FirstKeyPipe],
+  imports: [ReactiveFormsModule, CommonModule, FirstKeyPipe, RouterLink],
   templateUrl: './registration.html',
   styles: ``,
 })
@@ -101,6 +102,6 @@ export class Registration {
 
   hasDisplayableError(controlName: string): Boolean {
     const control = this.form.get(controlName);
-    return Boolean(control?.invalid) && (this.isSubmitted || Boolean(control?.touched))
+    return Boolean(control?.invalid) && (this.isSubmitted || Boolean(control?.touched) || Boolean(control?.dirty))
   }
 }
