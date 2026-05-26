@@ -11,6 +11,10 @@ export const routes: Routes =
         children:
         [
             {
+                path:'',
+                component: Login
+            },
+            {
                 path:'signup',
                 component: Registration
             },
