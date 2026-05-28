@@ -84,11 +84,9 @@ export class Registration {
                     break;
 
                   default:
-                  console.log('code',error.code);
                   this.toastr.error('Please contact developer.', 'Registration Failed');
                   break;
                 }
-                console.log('error: ', errResp);
               });
             }
             else {
@@ -96,7 +94,6 @@ export class Registration {
             }
           }
         });
-      console.log(this.form.value);
     }
   }
 

@@ -14,4 +14,8 @@ export class AuthService
   createUser(formData : any){
     return this.authECApi.post(this.baseUrl + "/signup", formData)
   }
+
+  singin(formData : any){
+    return this.authECApi.post(this.baseUrl + "/signin", formData)
+  }
 }
