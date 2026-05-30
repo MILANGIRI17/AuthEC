@@ -9,24 +9,29 @@ export const routes: Routes =
     { 
         path:'',
         component: User,
+        title: 'Home Page',
         children:
         [
             {
                 path:'',
+                title: 'Login',
                 component: Login
             },
             {
                 path:'signup',
+                title: 'Signup',
                 component: Registration
             },
             {
                 path: 'singin',
+                title: 'Signin',
                 component: Login
             }
         ]
     },
     {
-        path : 'dashboard',
+        path: 'dashboard',
+        title: 'Dashboard',
         component: Dashboard
     }
 ];
