@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -14,7 +13,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class Login {
   isSubmitted: boolean = false;
-
   service: AuthService = inject(AuthService);
   router: Router = inject(Router);
   toastr: ToastrService = inject(ToastrService);
@@ -35,7 +33,7 @@ export class Login {
         },
         error: (err: any) => {
           if (err.status == 400) {
-            this.toastr.error('Incorrect email or password','Login failed');
+            this.toastr.error('Incorrect email or password', 'Login failed');
           }
           console.log('error: ', err)
         }

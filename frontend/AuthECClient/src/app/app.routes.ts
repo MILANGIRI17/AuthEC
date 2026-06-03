@@ -15,13 +15,13 @@ export const routes: Routes =
             children:
                 [
                     {
-                        path: '', title: 'User', component: User
+                        path: '', title: 'User', component: User, canActivate: [authGuard]
                     },
                     {
-                        path: 'signup', title: 'Signup', component: Registration
+                        path: 'signup', title: 'Signup', component: Registration, canActivate: [authGuard]
                     },
                     {
-                        path: 'signin', title: 'signin', component: Login
+                        path: 'signin', title: 'signin', component: Login, canActivate: [authGuard]
                     }
                 ]
         },

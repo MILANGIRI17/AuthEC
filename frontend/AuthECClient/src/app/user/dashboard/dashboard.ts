@@ -14,6 +14,6 @@ export class Dashboard {
 
   onLogout() {
     this.authService.deleteToken();
-    this.router.navigateByUrl('/singin');
+    this.router.navigateByUrl('/signin');
   }
 }

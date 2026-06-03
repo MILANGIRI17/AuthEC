@@ -34,9 +34,9 @@ export class Registration {
   formBuilder = inject(FormBuilder);
   form = this.formBuilder.group({
     userName:
-    ['',
-      Validators.required
-    ],
+      ['',
+        Validators.required
+      ],
     fullName:
       ['',
         Validators.required
@@ -84,8 +84,8 @@ export class Registration {
                     break;
 
                   default:
-                  this.toastr.error('Please contact developer.', 'Registration Failed');
-                  break;
+                    this.toastr.error('Please contact developer.', 'Registration Failed');
+                    break;
                 }
               });
             }
