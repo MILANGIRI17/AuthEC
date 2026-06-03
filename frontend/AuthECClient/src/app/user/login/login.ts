@@ -30,9 +30,8 @@ export class Login {
     if (this.form.valid) {
       this.service.singin(this.form.value).subscribe({
         next: (res: any) => {
-          localStorage.setItem('token', res.token);
+          this.service.saveToken(res.token);
           this.router.navigateByUrl('/dashboard');
-          console.log('success: ', res)
         },
         error: (err: any) => {
           if (err.status == 400) {
@@ -42,7 +41,6 @@ export class Login {
         }
       });
     }
-
   };
 
   hasDisplayableError(controlName: string): Boolean {

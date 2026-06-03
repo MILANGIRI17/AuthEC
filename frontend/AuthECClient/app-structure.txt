@@ -11,7 +11,9 @@ src
      |____ dashboard(cmp. folder)
      |
      |__ shared
+         |__auth.guard.ts
          |
+         |__constants.ts
          |__pipes
          |    |__ first-key.pipe.ts
          |
