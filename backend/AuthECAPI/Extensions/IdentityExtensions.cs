@@ -51,6 +51,7 @@ namespace AuthECAPI.Extensions
         {
             app.UseAuthentication();
             app.UseAuthorization();
+            return app;
         }
     }
 }

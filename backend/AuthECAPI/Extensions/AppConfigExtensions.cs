@@ -1,4 +1,6 @@
-﻿namespace AuthECAPI.Extensions
+﻿using AuthECAPI.Models;
+
+namespace AuthECAPI.Extensions
 {
     public static class AppConfigExtensions
     {
@@ -12,6 +14,13 @@
             });
 
             return app;
+        }
+
+        public static IServiceCollection AddAppConfig(this IServiceCollection service, IConfiguration config)
+        {
+            service.Configure<AppSettings>(config.GetSection("AppSettings"));
+            
+            return service;
         }
 
     }
