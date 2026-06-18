@@ -1,4 +1,6 @@
-﻿namespace AuthECAPI.Extensions
+﻿using Microsoft.OpenApi.Models;
+
+namespace AuthECAPI.Extensions
 {
     public static class SwaggerExtensions
     {
@@ -6,7 +8,31 @@
         {
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(option=>
+            {
+                option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Fill in the JWT token",
+                });
+                option.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id="Bearer"
+                            }
+                        }, new List<string>()
+                    }
+                });
+            });
             return services;
         }
 

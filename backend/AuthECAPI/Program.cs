@@ -19,7 +19,8 @@ app.ConfigureSwagerExplorer()
 
 app.UseHttpsRedirection();
 app.MapControllers();
-app.MapGroup("/api").MapIdentityUserEndpoints();
+app.MapGroup("/api").MapIdentityUserEndpoints()
+                    .MapAccountEndpoints();
 
 app.Run();
 
